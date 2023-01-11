@@ -1,0 +1,45 @@
+.form-custom label{
+    font-size: 14px;
+    font-weight: 500;
+}
+.form-custom input {
+    font-size: 14px;
+}
+.form-custom textarea {
+    font-size: 14px;
+}
+.form-autocomplete {
+    width: 100%;
+    height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    position: absolute;
+    bottom: -250px;
+    margin-bottom: 50px;
+}
+.list-value {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 20px;
+    transition: 0.2s;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+.list-value:hover {
+    background-color: #e9e9e9;
+}
+.list-value img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50px;
+    margin-right: 10px;
+}
+.remove {
+    display: none;
+}
+.box-project {
+    color: #363636;
+}
