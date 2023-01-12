@@ -9,7 +9,7 @@ class Projek extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["user_id", "dosen_id", "judul", "objek", "nomor_sk", "dimulai_pada", "selesai_pada"];
+    protected $fillable = ["user_id", "dosen_id", "judul", 'slug', "objek", "nomor_sk", "dimulai_pada", "selesai_pada"];
 
     public function user(){
         return $this->belongsTo(Pengguna::class);

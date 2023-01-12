@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Projek;
+use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 class ProjekController extends Controller
 {
@@ -58,6 +60,9 @@ class ProjekController extends Controller
             "dimulai_pada" => "required|string",
             "selesai_pada" => "required|string"
         ]);
+
+        // menambahkan slug
+        $data['slug'] = Str::slug($data['judul'], '-') .'-'. Str::uuid();
 
         Projek::create($data);
 
