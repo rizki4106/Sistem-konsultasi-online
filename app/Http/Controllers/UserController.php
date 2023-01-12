@@ -131,7 +131,18 @@ class UserController extends Controller
         }else{
             return response()->json([]);
         }
+    }
 
+    /**
+     * Menagani proses logout
+     * dengan menghapus semua session
+     */
+    public function logout(Request $req){
+        $req->session()->put("user_id");
+        $req->session()->put("user_nama");
+        $req->session()->put("user_jabatan");
+
+        return redirect("/login");
     }
 
     /**

@@ -5,9 +5,14 @@
 @extends('../templates.dashboard')
 @section('content')
     <div class="mt-5 border border-0 border-bottom pb-3">
-        <h4 class="fw-bold">Penerapan algoritma neural network</h4>
+        <h4 class="fw-bold">{{ $projek->judul }}</h4>
         <div class="d-flex justify-content-start align-items-center">
-            <span class="text-secondary">Dr. David., S.Kom., M.Kom</span>
+
+            @if(session("user_jabatan") == "mahasiswa")
+                <span class="text-secondary">Dosen Pembimbing {{ $projek->dosen->nama }}</span>
+            @else
+                <span class="text-secondary">Mahasiswa {{ $projek->user->nama }}</span>
+            @endif
             <i class="ms-2 me-2" data-feather="circle" width="12" size="12"></i>
             <span class="text-secondary">2 februari 2023 sampai 3 februari 2024</span>
         </div>

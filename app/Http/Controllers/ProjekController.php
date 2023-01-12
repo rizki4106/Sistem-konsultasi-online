@@ -77,7 +77,10 @@ class ProjekController extends Controller
      */
     public function show($slug)
     {
-        return view("dashboard.projek");
+        $projek = Projek::where("slug", $slug)->first();
+        return view("dashboard.projek", [
+            "projek" => $projek,
+        ]);
     }
 
     /**

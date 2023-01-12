@@ -22,10 +22,10 @@ Route::post("/daftar/proses", [UserController::class, "store"]);
 Route::get('/login', [UserController::class, "index"]);
 Route::post("/login/proses", [UserController::class, "login"]);
 Route::get("/user/dosen",[UserController::class, "cari_dosen"]);
+Route::get("/user/logout", [UserController::class, "logout"])->middleware("pengguna");
 
 // dashboard
-Route::get("/dashboard/mahasiswa", [ProjekController::class, "index"]);
-Route::get("/projek/read/{slug}", [ProjekController::class, "show"]);
+Route::get("/projek/read/{slug}", [ProjekController::class, "show"])->middleware("pengguna");
 
 // aktifitas
 Route::get("/activity/detail", [ActivityController::class, "detail"]);
