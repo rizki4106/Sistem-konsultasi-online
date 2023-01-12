@@ -15,9 +15,7 @@ use App\Http\Controllers\ActivityController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get("/", function(){
-    return view("dashboard.index");
-})->middleware("pengguna");
+Route::get("/", [ProjekController::class, "index"])->middleware("pengguna");
 
 Route::get('/daftar', [UserController::class, "daftar"]);
 Route::post("/daftar/proses", [UserController::class, "store"]);

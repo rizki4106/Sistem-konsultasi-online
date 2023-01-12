@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Projek;
 
 class ProjekController extends Controller
 {
@@ -11,9 +12,15 @@ class ProjekController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-        return view("dashboard.mahasiswa");
+        $data = Projek::where("user_id", $req->session()
+        ->get("user_id"))
+        ->orderbyDesc("id")->get();
+
+        return view("dashboard.index", [
+            "data" => $data,
+        ]);
     }
 
     /**
@@ -42,7 +49,19 @@ class ProjekController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            "user_id" => "required|numeric",
+            "dosen_id" => "required|numeric",
+            "judul" => "required|string|max:50",
+            "objek" => "required|string|max:50",
+            "nomor_sk" => "required|string|max:50",
+            "dimulai_pada" => "required|string",
+            "selesai_pada" => "required|string"
+        ]);
+
+        Projek::create($data);
+
+        return redirect('/');
     }
 
     /**

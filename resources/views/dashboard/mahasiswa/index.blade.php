@@ -13,66 +13,74 @@
 
     <!-- content -->
     <div class="mt-5">
-        <a href="/" class="border border-1 d-block p-3 radius-2 text-decoration-none rounded-1 mb-3 box-project">
-            <h5>Penerapan algoritma neural network</h5>
-            <div class="d-flex justify-content-start align-items-center">
-                <span class="text-secondary">Dr. David., S.Kom., M.Kom</span>
-                <i class="ms-2 me-2" data-feather="circle" width="12" size="12"></i>
-                <span class="text-secondary">2 jam yang lalu</span>
-            </div>
-        </a>
-        <a href="/" class="border border-1 d-block p-3 radius-2 text-decoration-none rounded-1 box-project mb-3">
-            <h5>Penerapan algoritma neural network</h5>
-            <div class="d-flex justify-content-start align-items-center">
-                <span class="text-secondary">Dr. David., S.Kom., M.Kom</span>
-                <i class="ms-2 me-2" data-feather="circle" width="12" size="12"></i>
-                <span class="text-secondary">2 jam yang lalu</span>
-            </div>
-        </a>
+        @foreach ($data as $item)    
+            <a href="/" class="border border-1 d-block p-3 radius-2 text-decoration-none rounded-1 mb-3 box-project">
+                <h5>{{ $item->judul }}</h5>
+                <div class="d-flex justify-content-start align-items-center">
+                    <span class="text-secondary">{{ $item->dosen->nama }}</span>
+                    <i class="ms-2 me-2" data-feather="circle" width="12" size="12"></i>
+                    <span class="text-secondary">dimulai pada {{ $item->dimulai_pada }} sampai {{ $item->selesai_pada }}</span>
+                </div>
+            </a>
+        @endforeach
     </div>
 
     <!-- modal untuk membuat projek baru -->
     <div class="modal fade" id="tambahProjek" tabindex="-1" aria-labelledby="tambahProjek" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <form action="/api/project/create" method="POST" class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title fs-5" id="exampleModalLabel">Projek Baru</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="POST" class="modal-body form-custom">
+            <div class="modal-body form-custom">
                 @csrf
                 <label for="judul">Judul</label>
-                <input type="text" class="form-control mb-3 mt-2 form-control-lg border-3" name="judul" id="judul" placeholder="Contoh penerapan algoritma x"/>
+                <input 
+                    type="text"
+                    class="form-control mb-3 mt-2 form-control-lg border-3"
+                    name="judul"
+                    id="judul"
+                    placeholder="Contoh penerapan algoritma x"
+                />
+
+                <input type="hidden" name="user_id" value="{{ Session::get('user_id') }}"/>
 
                 <label for="objek">Objek Penelitian</label>
-                <input type="text" class="form-control mb-3 mt-2 border-3" name="objek" id="objek" placeholder="Masukan objek penelitian"/>
+                <input 
+                    type="text"
+                    class="form-control mb-3 mt-2 border-3"
+                    name="objek"
+                    id="objek"
+                    placeholder="Masukan objek penelitian"
+                />
 
                 <label for="dosen">Dosen Pembimbing</label>
                 <div class="position-relative mt-2 mb-3 hidden">
-                    <input type="text" autocomplete="off" id='nama-dosen' class="form-control border-3" placeholder="Contoh Dr. DAVID, S.Kom.,M.Cs.,M.Kom"/>
+                        <input type="text" autocomplete="off" id='nama-dosen' class="form-control border-3" placeholder="Contoh Dr. DAVID, S.Kom.,M.Cs.,M.Kom"/>
 
-                    {{-- auto complete --}}
-                    <div class="form-autocomplete border border-3 remove" id="list-dosen">
+                        {{-- auto complete --}}
+                        <div class="form-autocomplete border border-3 remove" id="list-dosen">
 
+                        </div>
+                        <input type="hidden" name="dosen_id" value="0" id="id-dosen"/>
                     </div>
-                    <input type="hidden" name="dosen" value="0" id="id-dosen"/>
+
+                    <label for="nomor">Nomor SK</label>
+                    <input type="text" class="form-control mb-3 mt-2 border-3" name="nomor_sk" id="nomor" placeholder="Contoh 007.10/KP/STMIK-PTK/2022"/>
+
+                    <label for="mulai">Tanggal Mulai</label>
+                    <input type="date" class="form-control mb-3 mt-2 border-3" name="dimulai_pada" id="mulai" placeholder="Tanggal mulai pengerjaan"/>
+
+                    <label for="selesai">Tanggal Selesai</label>
+                    <input type="date" class="form-control mb-3 mt-2 border-3" name="selesai_pada" id="selesai" placeholder="Tanggal selesai pengerjaan"/>
+
                 </div>
-
-                <label for="nomor">Nomor SK</label>
-                <input type="text" class="form-control mb-3 mt-2 border-3" name="nomor" id="nomor" placeholder="Contoh 007.10/KP/STMIK-PTK/2022"/>
-
-                <label for="mulai">Tanggal Mulai</label>
-                <input type="date" class="form-control mb-3 mt-2 border-3" name="mulai" id="mulai" placeholder="Tanggal mulai pengerjaan"/>
-
-                <label for="selesai">Tanggal Selesai</label>
-                <input type="date" class="form-control mb-3 mt-2 border-3" name="selesai" id="selesai" placeholder="Tanggal selesai pengerjaan"/>
-
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
             </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-            </div>
         </div>
     </div>
 

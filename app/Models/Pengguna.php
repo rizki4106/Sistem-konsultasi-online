@@ -11,4 +11,8 @@ class Pengguna extends Model
 
     protected $fillable = ["nama", "email", "password", "foto", "nomor_identitas", "jabatan", "dibuat_pada"];
     protected $hidden = ["password", "dibuat_pada"];
+
+    public function projek(){
+        return $this->hasMany(Projek::class);
+    }
 }
