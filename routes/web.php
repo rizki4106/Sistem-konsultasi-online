@@ -16,8 +16,9 @@ use App\Http\Controllers\ActivityController;
 |
 */
 
-Route::get('/login', [UserController::class, "index"]);
 Route::get('/daftar', [UserController::class, "daftar"]);
+Route::post("/daftar/proses", [UserController::class, "store"]);
+Route::get('/login', [UserController::class, "index"]);
 
 // dashboard
 Route::get("/dashboard/mahasiswa", [ProjekController::class, "index"]);

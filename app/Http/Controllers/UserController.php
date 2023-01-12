@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengguna;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -35,14 +37,39 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * menangani pendaftaran user
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+
+        // melakukan validasi terhadap data yang dikirimkan
+        $data = $request->validate([
+            "nama" => "required|string|max:50",
+            "email" => "required|email:rfc,dns|max:50|",
+            "password" => "required|string|max:50",
+            "nomor_identitas" => "required|string|max:20",
+            "jabatan" => "required|string|max:20",
+        ]);
+
+        // hasing password
+        $data['password'] = Hash::make($request->password);
+        $data['foto'] = "default.png";
+
+        // check apakah email sudah terdaftar atau belum
+        $existsing_user = Pengguna::select("email")->where("email", $request->email)->exists();
+
+        if($existsing_user){
+            return redirect('/daftar')->with("failed", "email sudah terdaftar");
+        }else{
+
+            // memasukan data pengguna
+            Pengguna::create($data);
+
+            return redirect('/login');
+        }
     }
 
     /**
