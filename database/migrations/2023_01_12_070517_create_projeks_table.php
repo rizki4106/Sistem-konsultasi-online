@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId("user_id");
             $table->foreignId("dosen_id");
             $table->string("judul", 100);
+            $table->string("uuid", 150);
             $table->string("objek", 50);
             $table->string("nomor_sk", 50);
             $table->date("dimulai_pada");
