@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pengguna;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\Jsonable;
 
 class UserController extends Controller
 {
@@ -111,7 +112,25 @@ class UserController extends Controller
             // kembalikan karena email tidak terdaftar
             return redirect("/login")->with("failed", "email tidak terdaftar");
         }
+    }
 
+    /**
+     * Mencari nama dosen berdasarkan nama dosen
+     * @param {str} nama -> nama dosen
+     */
+
+    public function cari_dosen(Request $request){
+
+        if($request->exists("nama")){
+
+            // mengambil data hanya dosen dan berdasarkan nama yang cocok
+            $data = Pengguna::where("jabatan", "dosen")->where("nama", "LIKE", "%". $request->get("nama") ."%")->get();
+    
+            // return data sebagai data json
+            return $data->toJson();
+        }else{
+            return response()->json([]);
+        }
 
     }
 

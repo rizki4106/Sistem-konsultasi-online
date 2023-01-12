@@ -1,4 +1,4 @@
-@extends('../templates.dashboard')
+@extends('../../templates.dashboard')
 
 @section("content")
 

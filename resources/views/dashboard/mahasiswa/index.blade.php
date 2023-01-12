@@ -1,5 +1,4 @@
-@extends('../templates.dashboard')
-
+@extends('../../templates.dashboard')
 @section("content")
     <div class="d-flex justify-content-between align-items-end mt-4">
         <div class="d-block">
@@ -50,23 +49,13 @@
 
                 <label for="dosen">Dosen Pembimbing</label>
                 <div class="position-relative mt-2 mb-3 hidden">
-                    <input type="text" id='nama-dosen' class="form-control border-3" placeholder="Contoh Dr. DAVID, S.Kom.,M.Cs.,M.Kom"/>
+                    <input type="text" autocomplete="off" id='nama-dosen' class="form-control border-3" placeholder="Contoh Dr. DAVID, S.Kom.,M.Cs.,M.Kom"/>
 
                     {{-- auto complete --}}
                     <div class="form-autocomplete border border-3 remove" id="list-dosen">
-                        <div class="list-value">
-                            <img src="https://cdn.pixabay.com/photo/2022/12/24/21/14/portrait-7676482_960_720.jpg"/>
-                            <span id='nama-dosen'>Dr. DAVID, S.Kom.,M.Cs.,M.Kom</span>
-                        </div>
-                        <div class="list-value">
-                            <img src="https://cdn.pixabay.com/photo/2022/12/24/21/14/portrait-7676482_960_720.jpg"/>
-                            <span id='nama-dosen'>Dr. DAVID, S.Kom.,M.Cs.,M.Kom</span>
-                        </div>
-                        <div class="list-value">
-                            <img src="https://cdn.pixabay.com/photo/2022/12/24/21/14/portrait-7676482_960_720.jpg"/>
-                            <span id='nama-dosen'>Dr. DAVID, S.Kom.,M.Cs.,M.Kom</span>
-                        </div>
+
                     </div>
+                    <input type="hidden" name="dosen" value="0" id="id-dosen"/>
                 </div>
 
                 <label for="nomor">Nomor SK</label>

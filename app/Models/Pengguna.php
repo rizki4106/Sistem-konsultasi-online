@@ -10,4 +10,5 @@ class Pengguna extends Model
     use HasFactory;
 
     protected $fillable = ["nama", "email", "password", "foto", "nomor_identitas", "jabatan", "dibuat_pada"];
+    protected $hidden = ["password", "dibuat_pada"];
 }

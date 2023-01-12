@@ -18,21 +18,57 @@ class Project {
         nama.addEventListener("keyup", evt => {
             if(nama.value.length > 0){
                 dosen.classList.remove("remove")
+
+                // mencari dosen
+                this.searchDosen(nama.value, dosen, nama)
             }else{
                 dosen.classList.add("remove")
             }
         })
-        
+    }
 
-        // manghandle ketika user memilih dosen kemudian set input value sesuai dengan yang dipilih user
-        const value = document.querySelectorAll("#nama-dosen")
+    /**
+     * Mencari dosen ke server berdasarkan nama
+     * @param {String} name -> nama dari dosen berdasarkan input dari user
+     * @param {HTMLDivElement} container_dosen -> container untuk menyimpan data dosen yang berupa tag <div>
+     * @param {HTMLInputElement} input_nama -> form input yang digunakan untuk memasukan nama dosen
+     */
+    searchDosen(name, container_dosen, input_nama){
+        const xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4 && xhr.status === 200){
+                const response = JSON.parse(xhr.responseText);
 
-        for(let i = 0; i < value.length; i++){
-            value[i].addEventListener("click", () => {
-                nama.value = value[i].textContent
-                dosen.classList.add("remove")
-            })
+                let res = ''
+
+                response.forEach(items => {
+                    res += `<div class="list-value">
+                    <img src="https://cdn.pixabay.com/photo/2022/12/24/21/14/portrait-7676482_960_720.jpg"/>
+                    <span id='nama-dosen' dosen-id='${items.id}'>${items.nama}</span>
+                    </div>`
+                })
+
+                container_dosen.innerHTML = res
+
+                // manghandle ketika user memilih dosen kemudian set input value sesuai dengan yang dipilih user
+                const value = document.querySelectorAll("#nama-dosen")
+
+                // mengambil input id dosen
+                const id_dosen = document.querySelector("#id-dosen")
+
+                for(let i = 0; i < value.length; i++){
+                    value[i].addEventListener("click", () => {
+                        input_nama.value = value[i].textContent
+                        id_dosen.setAttribute("value", value[i].getAttribute("dosen-id"))
+                        container_dosen.classList.add("remove")
+                    })
+                }
+            }
         }
+        xhr.open("GET", `/api/user/get?nama=${name}`, true)
+        xhr.send()
+
+        
     }
 }
 
