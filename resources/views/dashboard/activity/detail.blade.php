@@ -79,7 +79,15 @@
             {{--  --}}
         </div>
         <div class="col-md-8">
+            <div class="p-3 container-canvas">
+
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    const activity = new Activity()
+    activity.LoadPdf("{{ asset('assets/pdf/example-2.pdf') }}", ".container-canvas")
+</script>
 @include('../../_snippets.footer')

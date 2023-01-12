@@ -43,3 +43,10 @@
 .box-project {
     color: #363636;
 }
+.container-canvas {
+    max-height: 100vh;
+    overflow-y: auto;
+}
+.container-canvas::-webkit-scrollbar {
+    width: 0px;
+}
