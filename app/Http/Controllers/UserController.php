@@ -73,6 +73,49 @@ class UserController extends Controller
     }
 
     /**
+     * Menangani user login
+     */
+    public function login(Request $request){
+
+        $data = $request->validate([
+            "email" => "required|email:rfc,dns|max:50|",
+            "password" => "required|string|max:50",
+        ]);
+
+        // get user by email and password
+        $user = Pengguna::where("email", $data['email']);
+
+        
+        if($user->exists()){
+
+            // mengambil record pertama user
+            $u = $user->first();
+
+            // cek apakah password nya valid
+            if(Hash::check($data['password'], $u->password)){
+
+                // set session
+                $request->session()->put("user_id", $u->id);
+                $request->session()->put("user_nama", $u->nama);
+                $request->session()->put("user_jabatan", $u->jabatan);
+
+                // jika arahkan ke home page
+                return redirect("/");
+            }else{
+
+                // jika tidak kembalikan ke halaman login dengan pesan password salah
+                return redirect("/login")->with("failed", "Password salah" . Hash::check($u->password, $data['password']));    
+            }
+        }else{
+
+            // kembalikan karena email tidak terdaftar
+            return redirect("/login")->with("failed", "email tidak terdaftar");
+        }
+
+
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
