@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjekController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\KomentarKontroller;
+use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------

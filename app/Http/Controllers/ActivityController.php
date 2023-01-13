@@ -76,6 +76,7 @@ class ActivityController extends Controller
 
             // convert file docs menjadi pdf
 
+            docs_to_pdf("/docs/".$parsed_name, "/docs/".$pdf_name);
             
             // simpan data aktivitas
             $activity = $request->validate([

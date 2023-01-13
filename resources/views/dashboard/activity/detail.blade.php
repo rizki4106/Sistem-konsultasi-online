@@ -95,6 +95,8 @@
     </div>
 </div>
 
+<span id="src-pdf" pdf-src="{{$data->file[0]->pdf_name}}"/>
+
 <script>
 
     /**
@@ -106,6 +108,11 @@
     }
 
     const activity = new Activity()
-    activity.LoadPdf("{{ asset('assets/pdf/example-2.pdf') }}", ".container-canvas")
+
+    // menambil nama file pdf yang akan ditampilkan
+    const pdf_src = document.querySelector("#src-pdf").getAttribute("pdf-src")
+
+    // menampilkan halaman pdf
+    activity.LoadPdf(`{{ asset('docs/${pdf_src}') }}`, ".container-canvas")
 </script>
 @include('../../_snippets.footer')
