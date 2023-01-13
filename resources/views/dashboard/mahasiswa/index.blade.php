@@ -14,7 +14,7 @@
     <!-- content -->
     <div class="mt-5">
         @foreach ($data as $item)    
-            <a href="/projek/read/{{$item->slug}}" class="border border-1 d-block p-3 radius-2 text-decoration-none rounded-1 mb-3 box-project">
+            <a href="/projek/read/{{$item->id}}/{{$item->slug}}" class="border border-1 d-block p-3 radius-2 text-decoration-none rounded-1 mb-3 box-project">
                 <h5>{{ $item->judul }}</h5>
                 <div class="d-flex justify-content-start align-items-center">
                     <span class="text-secondary">{{ $item->dosen->nama }}</span>

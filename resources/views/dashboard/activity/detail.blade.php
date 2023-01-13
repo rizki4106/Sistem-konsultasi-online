@@ -13,9 +13,9 @@
             <div class="d-flex justify-content-start align-items-center">
                 <span class="text-secondary">Kerja Praktek</span>
                 <i data-feather="circle" class="ms-2 me-2" width="12" height="12"></i>
-                <span class="text-secondary">Rizki Maulana</span>
+                <span class="text-secondary">{{$data->projek->user->nama}}</span>
             </div>
-            <h5>Penerapan algoritma neural network untuk self driving car</h5>
+            <h5>{{$data->projek->judul}}</h5>
             <hr/>
             {{-- info aktivitas --}}
             <div class="accordion" id="accordionExample">
@@ -24,15 +24,13 @@
                 <div class="accordion-item">
                     <div class="accordion-header">
                         <div class="accordion-button border-0 d-flex justify-content-start align-items-center" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <span class="text-secondary">Pesan tanggal 7 Januari 2022, 12:30 WIB</span>
+                            <span class="text-secondary">Pesan tanggal {{$data->created_at}}</span>
                         </div>
                     </div>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
-                        <h6 class="fw-bold">Konsultasi Bab 1</h6>
-                        <p>Pada bab 1 ini saya menjabarkan mengenai
-                            latar belakang dan alasan saya memilih
-                            topik penelitian ini</p>
+                        <h6 class="fw-bold">{{$data->judul}}</h6>
+                        <p>{{$data->deskripsi}}</p>
                       </div>
                     </div>
                 </div>

@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use App\Models\File;
+use App\Models\Activity;
 
 class ActivityController extends Controller
 {
@@ -19,8 +24,12 @@ class ActivityController extends Controller
     /**
      * Menampilkan detail dari aktifitas konsultasi
      */
-    public function detail(){
-        return view("dashboard.activity.detail");
+    public function detail($id){
+
+        $data = Activity::find($id);
+        return view("dashboard.activity.detail", [
+            "data" => $data,
+        ]);
     }
 
     /**
@@ -34,14 +43,55 @@ class ActivityController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Membuat aktifitas konsultasi baru
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+
+        if($request->hasFile("dokumen")){
+            // upload file dokumen
+            $file = $request->validate([
+                "dokumen" => "required"
+            ]);
+    
+            $docs = $request->file("dokumen");
+    
+            // simpan informasi file kedalam database
+            $original_filename = $docs->getClientOriginalName();
+    
+            // nama unik suapaya file yang namanya sama tidak ketimpa
+            $parsed_name = Str::uuid() . '.' . $docs->extension();
+
+            $pdf_name = Str::uuid(). '.pdf';
+    
+            // simpan original nama file ke dalam local disk
+            $docs->storeAs("docs", $parsed_name);
+
+            // convert file docs menjadi pdf
+
+            
+            // simpan data aktivitas
+            $activity = $request->validate([
+                "judul" => "required|string|max:100",
+                "deskripsi" => "required|string",
+                "projek_id" => "required|numeric"
+            ]);
+
+            $insert_activity = Activity::create($activity);
+            
+            // simpan data file kdalam database
+            File::create([
+                "docs_original_name" =>  $original_filename,
+                "docs_parsed_name" => $parsed_name,
+                "pdf_name" => $pdf_name,
+                "activity_id" => $insert_activity->id,
+            ]);
+        }
+
+        return redirect($request->origin);
     }
 
     /**

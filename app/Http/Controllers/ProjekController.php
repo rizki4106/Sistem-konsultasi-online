@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Projek;
+use App\Models\Activity;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Str;
 
@@ -75,11 +76,15 @@ class ProjekController extends Controller
      * @param  string $slug -> slug dari title project
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id, $slug)
     {
         $projek = Projek::where("slug", $slug)->first();
+        $activity = Activity::where("projek_id", $id)->orderbyDesc("id")->get();
+
         return view("dashboard.projek", [
             "projek" => $projek,
+            "activity" => $activity,
+            "projek_id" => $id,
         ]);
     }
 

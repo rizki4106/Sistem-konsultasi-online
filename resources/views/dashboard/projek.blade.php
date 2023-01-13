@@ -32,48 +32,54 @@
 
     <!-- list activity -->
     <div class="mt-5">
-        <a href="/" class="border border-1 d-block p-3 radius-2 text-decoration-none rounded-1 mb-3 box-project">
-            <h5>konsultasi bab 1</h5>
-            <div class="d-flex justify-content-start align-items-center">
-                <span class="text-secondary">Rizki Maulana</span>
-                <i class="ms-2 me-2" data-feather="circle" width="12" size="12"></i>
-                <span class="text-secondary">2 jam yang lalu</span>
+        @foreach ($activity as $item)
+        
+            <a href="/activity/detail/{{$item->id}}" class="border border-1 d-block p-3 radius-2 text-decoration-none rounded-1 mb-3 box-project">
+                <h5>{{$item->judul}}</h5>
+                <div class="d-flex justify-content-start align-items-center">
+                    <span class="text-secondary">{{$item->projek->user->nama}}</span>
+                    <i class="ms-2 me-2" data-feather="circle" width="12" size="12"></i>
+                    <span class="text-secondary">{{$item->created_at}}</span>
 
-                <!-- dokumen -->
-                <div class="d-flex justify-content-start align-items-center border rounded-5 p-1 ps-3 pe-3 ms-2">
-                    <span class="text-decoration" style="font-size: 12px;">document.docs</span>
+                    <!-- dokumen -->
+                    <div class="d-flex justify-content-start align-items-center border rounded-5 p-1 ps-3 pe-3 ms-2">
+                        <span class="text-decoration" style="font-size: 12px;">{{$item->file[0]->docs_original_name}}</span>
+                    </div>
+                    <!--  -->
                 </div>
-                <!--  -->
-            </div>
-        </a>
+            </a>
+        @endforeach
     </div>
 
     {{-- modal untuk menambahkan aktifitas baru --}}
     <div class="modal fade" id="tambahAktifitas" tabindex="-1" aria-labelledby="tambahAktifitas" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <form class="modal-content" action="/api/activity/create" enctype="multipart/form-data" method="POST">
             <div class="modal-header">
                 <h3 class="modal-title fs-5" id="exampleModalLabel">Projek Baru</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="POST" class="modal-body form-custom">
+            <div class="modal-body form-custom">
                 @csrf
+
+                <input type="hidden" name="projek_id" value="{{$projek_id}}"/>
+                <input type="hidden" name="origin" value="/projek/read/{{$projek->slug}}"/>
                 <label for="subjek">Subjek</label>
-                <input type="text" class="form-control mb-3 mt-2 form-control-lg border-3" name="subjek" id="subjek" placeholder="Contoh konsultasi bab 1"/>
+                <input type="text" class="form-control mb-3 mt-2 form-control-lg border-3" name="judul" id="subjek" placeholder="Contoh konsultasi bab 1"/>
 
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Upload dokumen (docs, docx)</label>
-                    <input class="form-control border-3" type="file" id="formFile">
+                    <input name="dokumen" class="form-control border-3" type="file" id="formFile">
                 </div>
 
                 <label for="deskripsi">Deskripsi</label>
-                <textarea class="form-control border-3 mt-2 mb-3" placeholder="Masukan deskripsi tentang konsultasi kamu hari ini" id="deskripsi" rows="3"></textarea>
-            </form>
+                <textarea name="deskripsi" class="form-control border-3 mt-2 mb-3" placeholder="Masukan deskripsi tentang konsultasi kamu hari ini" id="deskripsi" rows="3"></textarea>
+            </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Kirim</button>
             </div>
-            </div>
+            </form>
         </div>
     </div>
 @endsection

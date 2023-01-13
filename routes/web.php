@@ -25,9 +25,9 @@ Route::get("/user/dosen",[UserController::class, "cari_dosen"]);
 Route::get("/user/logout", [UserController::class, "logout"])->middleware("pengguna");
 
 // dashboard
-Route::get("/projek/read/{slug}", [ProjekController::class, "show"])->middleware("pengguna");
+Route::get("/projek/read/{id}/{slug}", [ProjekController::class, "show"])->middleware("pengguna");
 
 // aktifitas
-Route::get("/activity/detail", [ActivityController::class, "detail"]);
+Route::get("/activity/detail/{id}", [ActivityController::class, "detail"]);
 
 Route::get("/dashboard/dosen", [ProjekController::class, "dosen"]);
