@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjekController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\KomentarKontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,5 +33,7 @@ Route::get("/dosen/bimbingan", [ProjekController::class, "bimbingan"])->middlewa
 
 // aktifitas
 Route::get("/activity/detail/{id}", [ActivityController::class, "detail"]);
-
 Route::get("/dashboard/dosen", [ProjekController::class, "dosen"]);
+
+// komentar
+Route::post("/komentar/add", [KomentarKontroller::class, "store"])->middleware("pengguna");

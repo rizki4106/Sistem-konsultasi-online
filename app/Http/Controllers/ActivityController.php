@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\File;
+use App\Models\Komentar;
 use App\Models\Activity;
 
 class ActivityController extends Controller
@@ -27,8 +28,11 @@ class ActivityController extends Controller
     public function detail($id){
 
         $data = Activity::find($id);
+        $komentar = Komentar::where("activity_id", $id)->orderbyDesc("id")->get();
+
         return view("dashboard.activity.detail", [
             "data" => $data,
+            "komentar" => $komentar,
         ]);
     }
 

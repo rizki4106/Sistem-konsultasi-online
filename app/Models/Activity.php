@@ -22,4 +22,8 @@ class Activity extends Model
     public function dosen(){
         return $this->belongsTo(Activity::class);
     }
+
+    public function komentar(){
+        return $this->hasMany(Komentar::class);
+    }
 }

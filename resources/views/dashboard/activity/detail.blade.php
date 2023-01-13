@@ -6,7 +6,7 @@
             {{-- header --}}
             <div class="d-flex justify-content-start align-items-center mb-5">
                 <i data-feather="arrow-left" width="14" height="14"></i>
-                <span class="ms-2">kembali</span>
+                <span class="ms-2" onclick="goBack()" style="cursor: pointer;">kembali</span>
             </div>
 
             {{-- general info --}}
@@ -44,29 +44,40 @@
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
-                        <textarea class="form-control" placeholder="berikan masukan dan pendapat anda mengenai laporan ini" rows="4"></textarea>
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-primary btn-sm mt-3">kirim</button>
-                        </div>
+                        <form action="/komentar/add" method="POST">
+                            @csrf
+                            <input type="hidden" name="activity_id" value="{{ $data->id }}"/>
+                            <textarea 
+                                class="form-control" 
+                                placeholder="berikan masukan dan pendapat anda mengenai laporan ini" 
+                                rows="4"
+                                name="body"
+                            ></textarea>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary btn-sm mt-3">kirim</button>
+                            </div>
+                        </form>
 
                         <hr/>
 
                         {{-- list feedback --}}
+                        @foreach($komentar as $k)
                         <div class="border border-1 p-3 rounded">
                             {{-- header feedback --}}
                             <div class="d-flex justify-content-start align-items-start">
                                 <img src="https://cdn.pixabay.com/photo/2022/11/14/10/37/chinese-lanterns-7591296_960_720.jpg" width="32" height="32" class="rounded"/>
                                 <div class="ms-3">
-                                    <span class="d-blok fw-semibold">Rizki Maulana</span>
+                                    <span class="d-blok fw-semibold">{{$k->user->nama}}</span>
                                     <br/>
-                                    <span class="d-blok text-secondary">2 jam yang lalu</span>
+                                    <span class="d-blok text-secondary">{{$k->created_at}}</span>
                                 </div>
                             </div>
                             {{-- body feeedback --}}
                             <div class="d-block mt-3 mb-2">
-                                <p>Bab 1 sudah di acc</p>
+                                <p>{{ $k->body }}</p>
                             </div>
                         </div>
+                        @endforeach
                         {{--  --}}
                       </div>
                     </div>
@@ -85,6 +96,15 @@
 </div>
 
 <script>
+
+    /**
+     * Menangani tombol kembali pada saat diklik
+     **/
+
+    function goBack(){
+        window.history.back()
+    }
+
     const activity = new Activity()
     activity.LoadPdf("{{ asset('assets/pdf/example-2.pdf') }}", ".container-canvas")
 </script>
