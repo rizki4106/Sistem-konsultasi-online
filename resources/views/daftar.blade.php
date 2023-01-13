@@ -21,8 +21,8 @@
                 class="form-control @error('nama') is-invalid @enderror"
                 id="floatingInputValue"
                 placeholder="contoh rizki maulana"
-                value="Jhon Due"
                 name="nama"
+                autofocus
                 >
             <label for="floatingInputValue">Nama Lengkap</label>
             @error("nama")
@@ -35,7 +35,6 @@
                 class="form-control @error('nama') is-invalid @enderror" 
                 id="floatingInputValue" 
                 placeholder="name@example.com"
-                value="test@example.com"
                 name="email"
             >
             <label for="floatingInputValue">Email</label>
@@ -46,8 +45,8 @@
         </div>
         <div class="form-floating mt-3">
             <select class="form-select" name="jabatan" id="floatingSelect" aria-label="Floating label select example">
-            <option selected>Pilih Jenis Akun</option>
-            <option value="dosen">Dosen</option>
+            <option>Pilih Jenis Akun</option>
+            <option selected value="dosen">Dosen</option>
             <option value="mahasiswa">Mahasiswa</option>
             </select>
             <label for="floatingSelect">Jenis Akun</label>
@@ -58,7 +57,6 @@
                 class="form-control @error('nomor_identitas') is-invalid @enderror"
                 id="floatingInputValue"
                 placeholder="name@example.com"
-                value="192102..."
                 name="nomor_identitas"
             >
             <label for="floatingInputValue">NIM/NIP</label>
@@ -72,7 +70,6 @@
                 class="form-control @error('password') is-invalid @enderror"
                 id="floatingInputValue"
                 placeholder="Masukan password"
-                value="..."
                 name="password"
             >
             <label for="floatingInputValue">Password Baru</label>

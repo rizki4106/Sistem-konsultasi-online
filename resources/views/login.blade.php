@@ -21,7 +21,7 @@
                 class="form-control @error('nama') is-invalid @enderror" 
                 id="floatingInputValue" 
                 placeholder="name@example.com"
-                value="test@example.com"
+                autofocus
                 name="email"
             >
             <label for="floatingInputValue">Email</label>
@@ -36,10 +36,9 @@
                 class="form-control @error('password') is-invalid @enderror"
                 id="floatingInputValue"
                 placeholder="Masukan password"
-                value="..."
                 name="password"
             >
-            <label for="floatingInputValue">Password Baru</label>
+            <label for="floatingInputValue">Password</label>
             @error("password")
             <span class="text-danger mt-2 d-block">{{ $message }}</span>
             @enderror
