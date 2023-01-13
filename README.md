@@ -1,66 +1,80 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistem Konsultasi Online
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![preview](public/preview/preview.PNG)
+## Latar Belakang ( Masalah )
+`SKO` atau ( sistem konsultasi online ) merupakan sebuah sistem yang bertujuan untuk mengatasi permasalahan dalam konsulasi `kerja praktek, kkn hingga skripsi` permasalahan yang diselesaikan meliputi :
 
-## About Laravel
+| Masalah | Deskripsi |
+|-|-|
+| Pemborosan kertas dan biaya | Pada saat mengerjakan skripsi atau kerja praktek maka untuk konsultasi kita diharuskan untuk print semua laporannya dan itu pun belum tentu benar |
+| Pemborosan waktu | Pada saat melakukan konsultasi dan bertemu dosen sering kali dosen tersebut tidak ada ditempat atau terlambat datang dan hal ini menyebabkan pemborosan waktu karena mahasiswa/i harus datang ke kampus jauh jauh dari rumah namun dosen yang bersangkutan tidak ada |
+| Tidak fleksibel | Waktu konsultasi tidak ada jadwal pasti sehingga terkadang saat kita pergi ke kampus pada suatu hari X dosennya tidak ada karena tidak ada jadwal konsultasi yang pasti |
+| Proses memakan waktu | Pada saat memeriksa dokumen karena harus di print maka mau tidak mau dosen memeriksanya harus dikampus atau dibawa pulang sedangkan membawa dokumen tidaklah mudah |
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Pembahasan ( Fitur dan Solusi )
+Dari permasalahan diatas maka dapat dirumuskan dan dihasilkan fitur sebagai berikut :
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| No | Nama Fitur | Deskripsi | Role |
+|-|-|-|-|
+|1| Request bimbingan kerja praktek atau skripsi | mahasiswa/i dapat melakukan permintaan bimbingan konsultasi kp atau skripsi dengan cara menginputkan informasi tentang judul, objek penelitian dan lain sebagainya | `mahasiswa/i` |
+|2| Request koreksi laporan | Dalam mengerjakan laporan kp ataupun skripsi kita biasanya memulai dari BAB 1 dan untuk melanjutkan ke bab berikutnya harus konsultasi menyerahkan BAB 1 tersebut, oleh karena itu pada fitur ini mahasiswa/i dapat mengirimkan laporan yang telah selesai dalam bentuk dokumen| `mahasiswa/i`|
+|3| Pembaca Dokumen word (`.docs, docx`) | Mahasiswa/i tidak perlu lagi melakukan print dokumen pada saat konsultasi karena bisa tinggal diupload dan dibuka secara online. begitupun bagi dosen tidak perlu mendownloadnya hanya tinggal membuka nya secara online sudah disediakan | `dosen` dan `mahasiswa/i` |
+|4| Pemberian Saran, Masukan atau Kritik | Jika mahasiswa konsultasi maka dosen akan memberikan masukan terhadap laporannya. difitur ini dosen bisa dengan mudah memberikan masukan terhadap laporan mahasiswa/i. dan bagi `mahasiswa` mereka bisa dengan mudah melihat masukan dari dosen nya tanpa harus pergi ke kampus | `dosen` dan `mahasiswa/i` |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+# Cara Menginstall
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Jika anda adalah seorang developer atau mahasiswa informatika dan sejenisnya bila anda ingin mengembangkan aplikasi ini maka tahapnya adalah sebagai berikut
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+#### 1. Pindahkan source code ke perangkat anda
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+git clone https://github.com/rizki4106/Sistem-konsultasi-online.git
+```
 
-## Laravel Sponsors
+```bash
+cd Sistem-konsultasi-online composer install && npm install && php artisan generate:key
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+#### 2. Buat file .env
+Buatlah file .env pada root project dan isi dengan data sebagai berikut
 
-### Premium Partners
+```.env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=NAMA DATABASE
+DB_USERNAME=USERNAME DATABASE
+DB_PASSWORD=PASSWORD DATABASE
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+sesuaikan pengaturan file `.env` diatas sesuai dengan pengaturan anda
 
-## Contributing
+#### 3. Migrasi
+Lakukan migrasi dengan tujuan untuk membuat tabel yang diperlukan
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+php artisan migrate
+```
 
-## Code of Conduct
+#### 4. Menjalankan Aplikasi
+Berikut ini adalah cara menjalankan aplikasi dalam mode development
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+php artisan serve
+```
 
-## Security Vulnerabilities
+karena project ini memerlukan hot reload pada saat anda mengedit tampilan makan anda perlu menjalankan perintah sebagai berikut
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+npm run dev
+```
 
-## License
+aplikasi akan berjalan pada url `http://127.0.0.1:8000`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Selanjutnya
+
+Akan ada tahap selanjutnya jika `mvp` ini bermanfaat dan dapat diterpkan oleh unversitas atau sekolah tinggi dan tentunya dengan mempertimbangkan masukan serta saran dari berbagai pihak
+
+#### Tech Stack
+`laravel 9` `bootstrap 5.3`
