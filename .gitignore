@@ -2,6 +2,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/docs/*
 /public/assets/pdf/*
 /storage/*.key
 /vendor
