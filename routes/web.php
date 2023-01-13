@@ -27,6 +27,9 @@ Route::get("/user/logout", [UserController::class, "logout"])->middleware("pengg
 // dashboard
 Route::get("/projek/read/{id}/{slug}", [ProjekController::class, "show"])->middleware("pengguna");
 
+// dashboard dosen
+Route::get("/dosen/bimbingan", [ProjekController::class, "bimbingan"])->middleware("dosen");
+
 // aktifitas
 Route::get("/activity/detail/{id}", [ActivityController::class, "detail"]);
 

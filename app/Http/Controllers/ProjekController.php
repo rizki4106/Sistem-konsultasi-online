@@ -17,9 +17,25 @@ class ProjekController extends Controller
      */
     public function index(Request $req)
     {
-        $data = Projek::where("user_id", $req->session()
-        ->get("user_id"))
-        ->orderbyDesc("id")->get();
+
+        // mendapatkan jabatan user
+        $role = $req->session()->get("user_jabatan");
+
+        // 
+        $data = array([]);
+
+        if($role == "mahasiswa") {
+
+            // mendapatkan data kripsi atau kp mahasiswa
+            $data = Projek::where("user_id", $req->session()
+            ->get("user_id"))
+            ->orderbyDesc("id")->get();
+
+        }else{
+
+            // menampilkan pekerjaan yang harus dikoreksi oleh dosen dari mahasiswa
+            $data = Activity::where("dosen_id", $req->session()->get("user_id"))->orderbyDesc("id")->get();
+        }
 
         return view("dashboard.index", [
             "data" => $data,
@@ -32,6 +48,19 @@ class ProjekController extends Controller
 
     public function dosen(){
         return view("dashboard.dosen");
+    }
+
+    /**
+     * menampilkan semua projek bimbingan dosen
+     */
+
+    public function bimbingan(Request $req){
+
+        $data = Projek::where("dosen_id", $req->session()->get("user_id"))->orderbyDesc("id")->get();
+
+        return view("dashboard.dosen.bimbingan", [
+            "data" => $data,
+        ]);
     }
 
     /**

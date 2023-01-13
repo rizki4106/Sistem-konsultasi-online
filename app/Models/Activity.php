@@ -9,7 +9,7 @@ class Activity extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["judul", "deskripsi", "file_id", "projek_id"];
+    protected $fillable = ["judul", "deskripsi", "file_id", "projek_id", "dosen_id"];
 
     public function file(){
         return $this->hasMany(File::class);
@@ -17,5 +17,9 @@ class Activity extends Model
 
     public function projek(){
         return $this->belongsTo(Projek::class);
+    }
+
+    public function dosen(){
+        return $this->belongsTo(Activity::class);
     }
 }

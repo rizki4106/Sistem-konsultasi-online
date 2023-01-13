@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("judul", 100);
             $table->text("deskripsi");
             $table->foreignId("projek_id");
+            $table->foreignId("dosen_id");
         });
     }
 

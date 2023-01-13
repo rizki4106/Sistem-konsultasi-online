@@ -15,4 +15,8 @@ class Pengguna extends Model
     public function projek(){
         return $this->hasMany(Projek::class);
     }
+
+    public function activity(){
+        return $this->hasMany(Activity::class);
+    }
 }

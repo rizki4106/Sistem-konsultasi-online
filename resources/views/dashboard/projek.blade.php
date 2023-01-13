@@ -24,10 +24,14 @@
             <h5 class="p-0">Aktifitas</h5>
             <span class="text-secondary">Kumpulan aktifitas konsultasi</span>
         </div>
+        @if(session("user_jabatan") == "mahasiswa")
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahAktifitas">
             <i data-feather="plus" width="14" height="14"></i>
             Aktifitas Baru
         </button>
+        @else
+        <div></div>
+        @endif
     </div>
 
     <!-- list activity -->
@@ -62,6 +66,7 @@
             <div class="modal-body form-custom">
                 @csrf
 
+                <input type="hidden" name="dosen_id" value="{{$projek->dosen->id}}"/>
                 <input type="hidden" name="projek_id" value="{{$projek_id}}"/>
                 <input type="hidden" name="origin" value="/projek/read/{{$projek->slug}}"/>
                 <label for="subjek">Subjek</label>

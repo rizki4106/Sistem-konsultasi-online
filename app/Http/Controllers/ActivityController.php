@@ -77,7 +77,8 @@ class ActivityController extends Controller
             $activity = $request->validate([
                 "judul" => "required|string|max:100",
                 "deskripsi" => "required|string",
-                "projek_id" => "required|numeric"
+                "projek_id" => "required|numeric",
+                "dosen_id" => "required|numeric",
             ]);
 
             $insert_activity = Activity::create($activity);
